@@ -1,4 +1,4 @@
-let startTime = "";
+let startTime = 0;
 let endTime = "";
 let checkTime = "";
 let times = []
@@ -10,70 +10,194 @@ function main() {
     let start = document.getElementById("start");
     start.addEventListener("click", () => {
         startTime = noteTime();
-        start.disabled = true;
+        startTimer();
         console.log(startTime)
     });
     
     // get time everytime the extension is opened
+    if(startTime != 0){
+    console.log('window alert')
     document.addEventListener("DOMContentLoaded", () => {
         checkTime = noteTime(); // Set the checkTime variable
-    });
-    
+        let diff = checkTime - startTime; //get time difference in milliseconds
+        let timeDiff = runCheckedTime(diff); //change time from milliseconds to hours, minutes, and seconds (return in a array)
+        checkTimer(timeDiff)
+        });
+    }   
     // Set endTime when the document is clicked (for testing)
     let stop = document.getElementById("stop");
     stop.addEventListener("click", () => {
         endTime = noteTime();
         times.push([startTime, endTime])
         console.log(endTime)
-        runCheckedTime(startTime, endTime);
+        let diff = endTime - startTime;
+        runCheckedTime(diff);
+        stopTime();
     });
 }
 
 // set any variable to the current time
 function noteTime() {
     const fullTime = new Date();
-    const currentTime = fullTime.toLocaleTimeString('it-IT');
+    const currentTime = fullTime.getTime()
+    // const currentTime = fullTime.toLocaleTimeString('it-IT');
     return currentTime; // Return the current time
 }
 
-function runCheckedTime(startTime, endTime) {
-    console.log(startTime + " " + endTime)
+function runCheckedTime(time) {
+    // convert miliseconds to regular time
+    seconds = Math.floor((time / 1000) % 60),
+    minutes = Math.floor((time / (1000 * 60)) % 60),
+    hours = Math.floor((time / (1000 * 60 * 60)) % 24);
 
-    // split the times into lists to use each hour, minute and second
-    let splitted1 = startTime.split(":");
-    let splitted2 = endTime.split(":");
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-    console.log(splitted1)
-    console.log(splitted2)
-  
-    // Convert hours and minutes to integers
-    let startHour = parseInt(splitted1[0]);
-    let startMin = parseInt(splitted1[1]);
-    let startSec = parseInt(splitted1[2]);
-
-
-    let endHour = parseInt(splitted2[0]);
-    let endMin = parseInt(splitted2[1]);
-    let endSec = parseInt(splitted2[2]);
-  
-    let hours = Math.abs(endHour - startHour);
-    if(hours < 10){
-        hours = '0' + hours;
-    } else if (hours > 12){ //account for military time
-        hours -= 12;
-    }
-
-    let minutes = Math.abs(endMin - startMin); //no negative numbers
-    if(minutes < 10){
-        minutes = '0' + minutes;
-    }
-
-    let seconds = Math.abs(endSec - startSec);
-    if(seconds < 0){
-        seconds = '0' + seconds;
-    }
-    console.log(hours + ":" + minutes + ":" + seconds )
-
+    return [hours, minutes, seconds]
+    console.log(`${hours}:${minutes}:${seconds}`);
 }
 
 main()
+
+
+
+
+/*
+*
+*
+* CLOCK DISPLAY FUNCTIONS
+*
+*
+*/
+
+
+
+/* initialization of different variables */
+let clearTime;
+let seconds = 0,
+  minutes = 0,
+  hours = 0;
+let secs, mins, gethours;
+
+
+// updates the clock interface
+function updateClock() {
+    /* check if seconds is equal to 60 and add a +1 
+    to minutes, and set seconds to 0 */
+    if (seconds === 60) {
+        seconds = 0;
+        minutes = minutes + 1;
+    }
+
+    // if minutes less than 10 add a "0(minutes):" to mins;
+    // example: 04:   
+    mins = minutes < 10 ? "0" + minutes + ":" : minutes + ":";
+
+    /* check if minutes is equal to 60 and add a +1 
+    to hours set minutes to 0 */
+    if (minutes === 60) {
+        minutes = 0;
+        hours = hours + 1;
+    }
+    
+    gethours = hours < 10 ? "0" + hours + ":" : hours + ":";
+    secs = seconds < 10 ? "0" + seconds : seconds;
+
+    /* display the timer */
+    let x = document.getElementById("timer");
+    x.innerHTML = gethours + mins + secs;
+
+    /* call the seconds counter after displaying the timer 
+    and increment seconds by +1 to keep it counting */
+    seconds++;
+
+    /* call the setTimeout( ) to keep the Count-Up alive ! */
+    clearTime = setTimeout(updateClock, 1000);
+}
+
+
+
+//create a function to start the Timer and hide the 
+function startTimer() {
+  /* check if seconds, minutes, and hours are equal to zero 
+    and start the Count-Up */
+  if (seconds === 0 && minutes === 0 && hours === 0) {
+
+    // hide the start button AFTER start
+    let showStart = document.getElementById("start");
+    showStart.style.display = "none";
+
+    // update the clock whenenver startTimer is called
+    updateClock();
+  }
+}
+
+
+
+/*create a function to stop the time */
+function stopTime() {
+  /* check if seconds, minutes and hours are not equal to 0 */
+  if (seconds !== 0 || minutes !== 0 || hours !== 0) {
+
+    // display total time 
+    let fulltime = document.getElementById("fulltime");
+    fulltime.style.display = "block";
+    fulltime.style.color = "#ff4500";
+    let time = gethours + mins + secs;
+    fulltime.innerHTML = "Time Recorded is " + time;
+
+    // reset the Clock
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    secs = "0" + seconds;
+    mins = "0" + minutes + ":";
+    gethours = "0" + hours + ":";
+
+    /* display the Count-Up Timer after it's been stopped */
+    let x = document.getElementById("timer");
+    let stopTime = gethours + mins + secs;
+    x.innerHTML = stopTime;
+
+    /* display all Count-Up control buttons */
+    let showStart = document.getElementById("start");
+    showStart.style.display = "inline-block";
+    let showStop = document.getElementById("stop");
+    showStop.style.display = "inline-block";
+
+    /* clear the Count-Up using the setTimeout( ) 
+        return value 'clearTime' as ID */
+    clearTimeout(clearTime);
+  }
+}
+
+function checkTimer(timeDiff){
+    console.log(timeDiff)
+    // set the Clock to difference from first start to last checked
+    seconds = timeDiff[2];
+    minutes = timeDiff[1];
+    hours = timeDiff[3];
+
+    if(seconds < 0){
+        secs = "0" + seconds + ":";
+    }
+    if(minutes < 0){
+        mins = "0" + minutes + ":";
+    }
+    if(hours < 0){
+        gethours = "0" + hours + ":";
+    }
+    
+
+    /* display the Count-Up Timer after it's been stopped */
+    let x = document.getElementById("timer");
+    let updateTime = gethours + mins + secs;
+    x.innerHTML = updateTime;
+
+    updateClock()
+
+}
+
+/*********** End of Stop Button Operations *********/
+
