@@ -235,6 +235,7 @@ function createStopWatchSection(projName) {
     stopWatchSection.appendChild(timerDisplay);
     stopWatchSection.appendChild(clockInButton);
     stopWatchSection.appendChild(stopButton);
+    return stopWatchSection;
 }
 
 /*
@@ -272,9 +273,9 @@ function getProjectNames(){
         const p = document.createElement("p");
         p.textContent = name;
         container.appendChild(p);
-    
         // create and display timer connected to this project
-        createStopWatchSection(name)
+        const stopwatchSection = createStopWatchSection(name);
+        container.appendChild(stopwatchSection);
     })
 }
 
@@ -283,8 +284,11 @@ function getProjectName(){
     const projectNames = parsedData.projects.map(project => project.name)
     const container = document.getElementById("output");
     const p = document.createElement("p");
-    p.textContent = projectNames[projectNames.length - 1];
+    const name = projectNames[projectNames.length - 1];
+    p.textContent = name;
     container.appendChild(p);
+    const stopwatchSection = createStopWatchSection(name);
+    container.appendChild(stopwatchSection);
 
 }
 
