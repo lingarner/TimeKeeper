@@ -6,7 +6,7 @@ let times = []
 // deals with information of when user clocks in or out
 function mainTimeHandler() {
     // everytime clock-in is clicked set the startTime Variable
-    let start = document.getElementById("start");
+    let start = document.querySelector(".start");
     start.addEventListener("click", () => {
         startTime = noteTime();
         startTimer();
@@ -24,7 +24,7 @@ function mainTimeHandler() {
         });
     }   
     // Set endTime when the document is clicked (for testing)
-    let stop = document.getElementById("stop");
+    let stop = document.querySelector(".stop");
     stop.addEventListener("click", () => {
         endTime = noteTime();
         times.push([startTime, endTime])
@@ -104,7 +104,7 @@ function updateClock() {
     secs = seconds < 10 ? "0" + seconds : seconds;
 
     /* display the timer */
-    let x = document.getElementById("timer");
+    let x = document.querySelector(".timer");
     x.innerHTML = gethours + mins + secs;
 
     /* call the seconds counter after displaying the timer 
@@ -124,7 +124,7 @@ function startTimer() {
   if (seconds === 0 && minutes === 0 && hours === 0) {
 
     // hide the start button AFTER start
-    let showStart = document.getElementById("start");
+    let showStart = document.querySelector(".start");
     showStart.style.display = "none";
 
     // update the clock whenenver startTimer is called
@@ -140,7 +140,7 @@ function stopTime() {
   if (seconds !== 0 || minutes !== 0 || hours !== 0) {
 
     // display total time 
-    let fulltime = document.getElementById("fulltime");
+    let fulltime = document.querySelector(".fulltime");
     fulltime.style.display = "block";
     fulltime.style.color = "#ff4500";
     let time = gethours + mins + secs;
@@ -155,14 +155,14 @@ function stopTime() {
     gethours = "0" + hours + ":";
 
     /* display the Count-Up Timer after it's been stopped */
-    let x = document.getElementById("timer");
+    let x = document.querySelector(".timer");
     let stopTime = gethours + mins + secs;
     x.innerHTML = stopTime;
 
     /* display all Count-Up control buttons */
-    let showStart = document.getElementById("start");
+    let showStart = document.querySelector(".start");
     showStart.style.display = "inline-block";
-    let showStop = document.getElementById("stop");
+    let showStop = document.querySelector(".stop");
     showStop.style.display = "inline-block";
 
     /* clear the Count-Up using the setTimeout( ) 
@@ -190,7 +190,7 @@ function checkTimer(timeDiff){
     
 
     /* display the Count-Up Timer after it's been stopped */
-    let x = document.getElementById("timer");
+    let x = document.querySelector(".timer");
     let updateTime = gethours + mins + secs;
     x.innerHTML = updateTime;
 
@@ -235,6 +235,7 @@ function createStopWatchSection(projName) {
     stopWatchSection.appendChild(timerDisplay);
     stopWatchSection.appendChild(clockInButton);
     stopWatchSection.appendChild(stopButton);
+
     return stopWatchSection;
 }
 
@@ -264,7 +265,7 @@ function checkForArray(){
     return parsedData
 
 }
-// 
+// this function returns and prints all project names in the array 
 function getProjectNames(){
     const parsedData = checkForArray();
     const projectNames = parsedData.projects.map(project => project.name)
@@ -276,9 +277,12 @@ function getProjectNames(){
         // create and display timer connected to this project
         const stopwatchSection = createStopWatchSection(name);
         container.appendChild(stopwatchSection);
+
+        mainTimeHandler()
     })
 }
 
+// this function added the new project name to the array and displays it immediately 
 function getProjectName(){
     const parsedData = checkForArray();
     const projectNames = parsedData.projects.map(project => project.name)
@@ -289,7 +293,7 @@ function getProjectName(){
     container.appendChild(p);
     const stopwatchSection = createStopWatchSection(name);
     container.appendChild(stopwatchSection);
-
+    mainTimeHandler()
 }
 
 // add project Names to AllData
