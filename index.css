@@ -1,84 +1,118 @@
-body{
+/* body{
     width: 100vh;
     height: 100vh;
+    font-family: ubuntu;
 }
 h5 {
     font-weight: bold;
     font-size: 30px;
     color: #4caf50;
-    font-family: ubuntu;
   }
-  h6 {
-    font-weight: bold;
-    font-size: 10px;
-    color: #4caf50;
-    margin-top: -5vh;
-    margin-bottom: -2vh;
-    font-family: ubuntu;
-  }
-  #stopWatch {
-    height: auto;
-    text-align: center;
-    display: block;
-    padding: 5px;
-  }
-  
-  #timer,
-  #fulltime {
-    width: 40vw;
-    height: auto;
-    padding: 20px;
-    font-weight: bold;
-    font-size: 30px;
-    font-family: ubuntu;
-    margin-left: 27vw;
-    display: block;
-    border: 1px solid #eee;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 0 2px 3px #ccc;
-    background-color: white;
-    color: #4caf50;
-  }
-  
-  button {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 15px;
-    font-family: ubuntu;
-    outline: none;
-    width: 80px;
-    padding: 10px 0px;
-    background-color: #4caf50;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    color: white;
-  }
-  h5, h6, p{
-  margin: 15px 0  !important;
-  }
-  #fulltime {
-    display: none;
-    font-size: 16px;
-    font-weight: bold;
-  }
+h6 {
+  font-weight: bold;
+  font-size: 10px;
+  color: #4caf50;
+  margin-top: -5vh;
+  margin-bottom: -2vh;
+}
+#stopWatch {
+  height: auto;
+  text-align: center;
+  display: block;
+  padding: 5px;
+}
 
-  #goalBox {
-    position: absolute;
-    width: 150px; /* Set the width to your desired value */
-    height: 10px;
-    background-color: gray;
-    border-radius: 20px;
-    z-index: 1;
-    
-  }
+#timer,
+#fulltime {
+  width: 25vw;
+  height: auto;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 27vw;
+  display: block;
+  border: 1px solid #eee;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  background-color: white;
+  color: #4caf50;
+}
 
-  #progressBox {
-    position: absolute;
-    width: 100px; /* Make the second rectangle slightly shorter */
-    height: 10px;
-    background-color: black;
-    border-radius: 20px;
-    z-index: 2;
-    
-  }
+button {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  outline: none;
+  width: 80px;
+  padding: 10px 0px;
+  background-color: #4caf50;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  color: white;
+}
+h5, h6, p{
+margin: 15px 0  !important;
+}
+#fulltime {
+  display: none;
+  font-size: 16px;
+  font-weight: bold;
+} */
+
+body, button, p, h1, h2, h3, h4, h5, h6, span, footer{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: var(--primary-font-style);
+}
+:root{
+  --main-bg-color: #fff;
+  --sec-bg-color: #05014a;
+  --active-font-color: rgb(217,171,128);
+  --main-font-color: white;
+  --light-grey: #f8f4f4;
+  --primary-font-style: 'Work Sans', sans-serif;
+}
+
+#mainTitle{
+  text-align: center;
+  padding: 10px 40px;
+  border-bottom: 3px solid black;
+  margin-bottom: 20px;
+}
+
+#goalBox {
+  position: absolute;
+  width: 150px; /* Set the width to your desired value */
+  height: 10px;
+  background-color: gray;
+  border-radius: 20px;
+  z-index: 1;
+  
+}
+#progressBox {
+  position: absolute;
+  width: 100px; /* Make the second rectangle slightly shorter */
+  height: 10px;
+  background-color: black;
+  border-radius: 20px;
+  z-index: 2;
+  
+}
+#start, #stop{
+  border: none;
+  background-color: transparent;
+  margin-bottom: 20px;
+}
+#add{
+  border: none;
+  background-color: transparent;
+  margin-bottom: 20px;
+}
+.material-symbols-outlined{
+  color:green;
+}
+

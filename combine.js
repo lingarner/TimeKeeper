@@ -208,7 +208,7 @@ function createStopWatchSection(projName) {
 
     // Create the heading
     const heading = document.createElement('h1');
-    heading.textContent = 'Timer';
+    // heading.textContent = 'Timer';
 
     // Create the timer display
     const timerDisplay = document.createElement('p');
@@ -272,6 +272,7 @@ function getProjectNames(){
     const container = document.getElementById("output");
     projectNames.forEach(name => {
         const p = document.createElement("p");
+        p.setAttribute('class', 'projectName');
         p.textContent = name;
         container.appendChild(p);
         // create and display timer connected to this project
