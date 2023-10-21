@@ -18,6 +18,9 @@
     "storage"
     ],
     "content_scripts": [
-    {"js": ["script.js"]}
+    {
+        "matches": "<all_urls>",
+        "js": ["script.js"]
+}
     ]
     }

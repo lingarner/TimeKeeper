@@ -32,12 +32,13 @@ function addDataToStorage() {
     const jsonData = {
       data: projectName
     };
+    const jsonString = JSON.stringify(jsonData, null, 2);
   
     // Display the JSON string
     document.getElementById("output").textContent = JSON.stringify(jsonData, null, 2);
   
     // Store the JSON object directly in sync storage
-    chrome.storage.sync.set({ "name": jsonData }, function() {
+    chrome.storage.sync.set({ name: jsonString }, function() {
       if (chrome.runtime.lastError) {
         console.error(chrome.runtime.lastError);
       } else {
