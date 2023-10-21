@@ -27,3 +27,28 @@ body, button, p, h1, h2, h3, h4, h5, h6, span, footer{
     font-family: var(--primary-font-style);
     /* font-weight:500 */
 }
+#goalBox {
+    position: absolute;
+    width: 150px; /* Set the width to your desired value */
+    height: 10px;
+    background-color: gray;
+    border-radius: 20px;
+    z-index: 1;
+    
+  }
+
+  #progressBox {
+    position: absolute;
+    width: 100px; /* Make the second rectangle slightly shorter */
+    height: 10px;
+    background-color: black;
+    border-radius: 20px;
+    z-index: 2;
+    
+  }
+.projectName{
+    margin-top: 20px
+}
+ .progressBar{
+    margin-bottom: 20px;
+ }

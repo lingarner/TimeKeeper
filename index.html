@@ -34,8 +34,28 @@
 <body>
     <h1 id="mainTitle">My Time</h1>
     <form class="formContainer" style="display: none;">
+        <!-- <input name="projectName" type="text" id="projectName" placeholder='Project/Category'>
+        <button id="addProjectButton" type="button">Add Project</button> -->
+        <h5 id="projectTitle">Project name</h5>
+        <div id="progressBar">
+            <div id="goalBox"></div>
+            <div id="progressBox"></div>
+        </div>
+        <h1> </h1><br>
         <input name="projectName" type="text" id="projectName" placeholder='Project/Category'>
-        <button id="addProjectButton" type="button">Add Project</button>
+        <input name="Goal Time" type="text" id="goalTime" placeholder='00:00:00'>
+        <select class="choose_color">
+            <option value="default">Select</option>
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+            <option value="yellow">yellow</option>
+            <option value="green">green</option>
+            <option value="purple">purple</option>
+            <option value="black">black</option>
+            <option value="orange">orange</option>
+          </select>
+          <button id="addProjectButton" type="button">Add Project</button>
+        <div id="inputsHere"></div>
     </form>
     <div id="output"></div>
     <button id="add"><span class="material-symbols-outlined">
