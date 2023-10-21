@@ -1,14 +1,23 @@
 {
-    "name": "Covid-19 Stats UK",
+    "name": "Timekeeper",
     "version": "1.0.0",
-    "description": "latest covid data of UK",
+    "description": "keep track of how much time you spend on your projects",
     "manifest_version": 3,
     "author": "Sampurna Chapagain",
     "action":{
         "default_popup": "index.html",
-        "default_title": "Latest Covid Report"
+        "default_title": "Timekeeper"
     },
     "icons": {
         "128": "images/logo.png"
-      }
-}
+    },
+    "background": {
+    "service_worker": "background.js"
+    },
+    "permissions": [
+    "storage"
+    ],
+    "content_scripts": [
+    {"js": ["script.js"]}
+    ]
+    }
