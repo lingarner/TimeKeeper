@@ -62,3 +62,23 @@ h5 {
     font-size: 16px;
     font-weight: bold;
   }
+
+  #goalBox {
+    position: absolute;
+    width: 150px; /* Set the width to your desired value */
+    height: 10px;
+    background-color: gray;
+    border-radius: 20px;
+    z-index: 1;
+    
+  }
+
+  #progressBox {
+    position: absolute;
+    width: 100px; /* Make the second rectangle slightly shorter */
+    height: 10px;
+    background-color: black;
+    border-radius: 20px;
+    z-index: 2;
+    
+  }
