@@ -1,12 +1,12 @@
 {
-    "name": "Time Keeper Anna",
+    "name": "Time Keeper",
     "version": "1.0.0",
-    "description": "latest covid data of UK",
+    "description": "Time Keeper",
     "manifest_version": 3,
-    "author": "Sampurna Chapagain",
+    "author": "Elyssa Hancock, Lindsay Garner,Anna Arutyunova",
     "action":{
         "default_popup": "index.html",
-        "default_title": "Latest Covid Report"
+        "default_title": "Time keeping"
     },
     "icons": {
         "128": "images/logo.png"

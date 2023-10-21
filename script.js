@@ -20,17 +20,93 @@ window.onload = function pullProjects(){
             }
 }
 
-function displayProjectNames(data){
-    const parsedData = data ? JSON.parse(data): {projects:[]};
-    const projectNames = parsedData.projects.map(project => project.name)
-    const container = document.getElementById("output");
-    projectNames.forEach(name => {
-        const p = document.createElement("p");
-        p.textContent = name;
-        container.appendChild(p);
-    })
-console.log(projectNames[0])
-}
+
+// function displayProjectNames(data){
+//     const inputElement = document.getElementById("goalTime");
+//     // const addProjectButton = document.getElementById("addProjectButton");
+//     // Add an event listener to the button to get the input value
+//     // addProjectButton.addEventListener("click", function() {
+//     // const inputValue = 
+    
+//     // });
+//     const parsedData = data ? JSON.parse(data): {projects:[]};
+//     const projectNames = parsedData.projects.map(project => project.name)
+//     const project = parsedData.projects
+//     const container = document.getElementById("output");
+//     const div = document.createElement("div");
+//     div.setAttribute('class', 'projects')
+//     project.forEach(project => {
+//         const p = document.createElement("p");
+//         p.textContent = project.name;
+//         const time = document.createElement('time');
+//         time.setAttribute('class', 'time')
+//         // localStorage.setItem('goalTime', inputElement.value)
+//         time.textContent = project.goalTime;
+//         const startButton = document.createElement("button");
+//         startButton.setAttribute('class','start main-btn');
+//         startButton.textContent = "Clock In"
+//         const stopButton = document.createElement("button")
+//         stopButton.textContent = "Clock Out"
+//         stopButton.setAttribute('class','stop main-btn')
+        
+//         div.appendChild(p);
+//         div.appendChild(time);
+//         div.appendChild(startButton);
+//         div.appendChild(stopButton);
+//         container.appendChild(div);
+//         return div;
+//     })
+
+// console.log(projectNames[0])
+// }
+
+function createProjectDiv(project) {
+    // Create a new div element with the class "projects"
+    const div = document.createElement("div");
+    div.setAttribute('class', 'projects');
+  
+    // Create a <p> tag and set its text content to the project name
+    const p = document.createElement("p");
+    p.textContent = project.name;
+  
+    // Create a <time> tag, set its class, and text content to the project goalTime
+    const time = document.createElement('time');
+    time.setAttribute('class', 'time');
+    time.textContent = project.goalTime;
+  
+    // Create a "Clock In" button
+    const startButton = document.createElement("button");
+    startButton.setAttribute('class', 'start main-btn');
+    startButton.textContent = "Clock In";
+  
+    // Create a "Clock Out" button
+    const stopButton = document.createElement("button");
+    stopButton.setAttribute('class', 'stop main-btn');
+    stopButton.textContent = "Clock Out";
+  
+    // Append the elements to the div
+    div.appendChild(p);
+    div.appendChild(time);
+    div.appendChild(startButton);
+    div.appendChild(stopButton);
+  
+    return div;
+  }
+  
+  function displayProjectNames(data) {
+    const parsedData = data ? JSON.parse(data) : { projects: [] };
+    const projectContainer = document.getElementById("output");
+  
+    parsedData.projects.forEach(project => {
+      const projectDiv = createProjectDiv(project);
+      projectContainer.appendChild(projectDiv);
+    });
+  
+    // Example of how to add a new project to the container:
+    // const newProject = { name: "New Project", goalTime: "00:00:00" };
+    // const newProjectDiv = createProjectDiv(newProject);
+    // projectContainer.appendChild(newProjectDiv);
+  }
 
 function clearProjectNames(){
     const container = document.getElementById('output');
@@ -49,14 +125,16 @@ function addDataToStorage() {
     const projectName = document.getElementById("projectName").value;  
 
     // Retrieve the existing data or initialize it as an empty array
+    const inputElement = document.getElementById("goalTime");
     let allData = localStorage.getItem("allData");
     const parsedData = allData ? JSON.parse(allData) : {projects: []};
+    const project = parsedData.projects
     console.log(parsedData);
     const newProject = {
             "name": projectName,
             "goalColor": "",
-            "progressColor": " ",
-            "goalTime": "00:00:00",
+            "progressColor": "",
+            "goalTime": inputElement.value,
             "startTime": null,
             "endtime": null,
             "times": []
