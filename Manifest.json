@@ -1,9 +1,9 @@
 {
     "name": "Time Keeper Anna",
     "version": "1.0.0",
-    "description": "latest covid data of UK",
+    "description": "our program to clock in and out of any project you want ",
     "manifest_version": 3,
-    "author": "Sampurna Chapagain",
+    "author": "Anna Arutyunova, Elyssa Hancock, Lindsay Garner",
     "action":{
         "default_popup": "index.html",
         "default_title": "Latest Covid Report"
