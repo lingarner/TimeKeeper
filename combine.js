@@ -3,8 +3,8 @@ let endTime = "";
 let checkTime = "";
 let times = []
 
-
-function main() {
+// deals with information of when user clocks in or out
+function mainTimeHandler() {
     // everytime clock-in is clicked set the startTime Variable
     let start = document.getElementById("start");
     start.addEventListener("click", () => {
@@ -53,11 +53,11 @@ function runCheckedTime(time) {
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-    return [hours, minutes, seconds]
     console.log(`${hours}:${minutes}:${seconds}`);
+    return [hours, minutes, seconds]
 }
 
-main()
+mainTimeHandler()
 
 
 
@@ -201,30 +201,161 @@ function checkTimer(timeDiff){
 /*********** End of Stop Button Operations *********/
 
 
+function createStopWatchSection(projName) {
+    // Create the main section
+    const stopWatchSection = document.createElement('section');
+    stopWatchSection.setAttribute('id', projName);
+
+    // Create the heading
+    const heading = document.createElement('h1');
+    heading.textContent = 'Timer';
+
+    // Create the timer display
+    const timerDisplay = document.createElement('p');
+    timerDisplay.setAttribute('id', 'timer');
+    timerDisplay.textContent = '00:00:00';
+
+    // Create the Clock-In button
+    const clockInButton = document.createElement('button');
+    clockInButton.setAttribute('id', 'start');
+    clockInButton.textContent = 'Clock-In';
+
+    // Create the Stop button
+    const stopButton = document.createElement('button');
+    stopButton.setAttribute('id', 'stop');
+    stopButton.textContent = 'Stop';
+
+    // Create the fulltime display
+    const fulltimeDisplay = document.createElement('p');
+    fulltimeDisplay.setAttribute('id', 'fulltime');
+    fulltimeDisplay.classList.add('fulltime');
+
+    // Append the elements to the section
+    stopWatchSection.appendChild(heading);
+    stopWatchSection.appendChild(timerDisplay);
+    stopWatchSection.appendChild(clockInButton);
+    stopWatchSection.appendChild(stopButton);
+}
+
 /*
 *
 *LOCAL STORAGE
 *
 *
 */
-function addDataToProject() {
 
-    // Retrieve the existing data or initialize it as an empty array
+
+// check for allData array and return it
+function checkForArray(){
+    // Check if the item with the key "allData" exists in localStorage
     let allData = localStorage.getItem("allData");
-    const parsedData = allData ? JSON.parse(allData) : {projects: []};
-    console.log(parsedData);
+
+    // If it doesn't exist, initialize it with an empty "projects" array
+    if (allData === null) {
+    const initialData = { projects: [] };
+    allData = JSON.stringify(initialData);
+    localStorage.setItem("allData", allData);
+    }
+
+    // Now, you can safely parse the data
+    const parsedData = JSON.parse(allData);
+
+    return parsedData
+
+}
+// 
+function getProjectNames(){
+    const parsedData = checkForArray();
+    const projectNames = parsedData.projects.map(project => project.name)
+    const container = document.getElementById("output");
+    projectNames.forEach(name => {
+        const p = document.createElement("p");
+        p.textContent = name;
+        container.appendChild(p);
+    
+        // create and display timer connected to this project
+        createStopWatchSection(name)
+    })
+}
+
+function getProjectName(){
+    const parsedData = checkForArray();
+    const projectNames = parsedData.projects.map(project => project.name)
+    const container = document.getElementById("output");
+    const p = document.createElement("p");
+    p.textContent = projectNames[projectNames.length - 1];
+    container.appendChild(p);
+
+}
+
+// add project Names to AllData
+function addDataToProject() {
+    const projectName = document.getElementById("projectName").value;  
+    
+    let parsedData = checkForArray();
+
     const newProject = {
-        startTime: startTime,
-        endTime: endTime,
-        times: times,
-        total
+        name: projectName,
+        startTime: null,
+        endTime: null,
+        times: null,
+        total: null,
+        goalColor: null,
+        progressColor: null
     }
     parsedData.projects.push(newProject);
     const updatedDataString = JSON.stringify(parsedData);
     localStorage.setItem("allData", updatedDataString)
     allData = localStorage.getItem("allData");
-    clearProjectNames();
-    displayProjectNames(allData);
+    getProjectName()
     
 }
 
+
+window.load = getProjectNames();
+// Get the button element by its ID
+const addProjectButton = document.getElementById("addProjectButton");
+// Add an event listener for the click event
+addProjectButton.addEventListener("click", () => {
+    addDataToProject();
+    document.getElementById('projectName').value = "";
+});
+
+
+// To add data to storage
+function addDataToStorage() {
+    // initalize the key to our hash map
+    localStorage.setItem("allData", JSON.stringify({ projects: [] }))
+
+    // get new project name from user
+    const projectName = document.getElementById("projectName").value;  
+
+    // Retrieve the existing data or initialize it as an empty array
+    const parsedData = checkForArray();
+    console.log(parsedData);
+    const newProject = {
+        name: projectName,
+        startTime: null,
+        endTime: null,
+        times: null,
+        total: null,
+        goalColor: null,
+        progressColor: null
+    }
+    parsedData.projects.push(newProject);
+    const updatedDataString = JSON.stringify(parsedData);
+    localStorage.setItem("allData", updatedDataString)
+    // displayProjectNames();
+    
+}
+
+function deleteData() {
+
+}
+
+const addProject = document.querySelector(".material-symbols-outlined");
+const formContainer = document.querySelector(".formContainer");
+addProject.addEventListener("click", function (){
+    formContainer.style.display = "block";
+    textInput.focus();
+});
