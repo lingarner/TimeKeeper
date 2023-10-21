@@ -64,10 +64,18 @@ function addDataToStorage() {
     
 }
 
-const addProject = document.querySelector(".material-symbols-outlined");
+const addProject = document.querySelector("#add");
 const formContainer = document.querySelector(".formContainer");
 addProject.addEventListener("click", function (){
-    formContainer.style.display = "block";
-    textInput.focus();
+    if (formContainer.style.display === "block") {
+        formContainer.style.display = "none"; // Hide the form
+      } else {
+        formContainer.style.display = "block"; // Show the form
+        // If you want to focus on an input field within the form
+        const textInput = formContainer.querySelector("input");
+        if (textInput) {
+          textInput.focus();
+        }
+      }
 });
   
