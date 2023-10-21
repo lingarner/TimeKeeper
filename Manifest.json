@@ -1,26 +1,14 @@
 {
-    "name": "Timekeeper",
+    "name": "Time Keeper Anna",
     "version": "1.0.0",
-    "description": "keep track of how much time you spend on your projects",
+    "description": "latest covid data of UK",
     "manifest_version": 3,
     "author": "Sampurna Chapagain",
     "action":{
         "default_popup": "index.html",
-        "default_title": "Timekeeper"
+        "default_title": "Latest Covid Report"
     },
     "icons": {
         "128": "images/logo.png"
-    },
-    "background": {
-    "service_worker": "background.js"
-    },
-    "permissions": [
-    "storage"
-    ],
-    "content_scripts": [
-    {
-        "matches": "<all_urls>",
-        "js": ["script.js"]
+      }
 }
-    ]
-    }
