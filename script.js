@@ -142,5 +142,15 @@ mySelect.addEventListener("change",function(){
             progressBox.style.backgroundColor = "#000000";
             goalBox.style.backgroundColor = "#818181"; // Default color if condition doesn't match any case
     }
+    // create and object
+    inputValue = {
+        "name": inputValue,
+        "goalColor": goalColor,
+        "progressColor": progressColor,
+        "goalTime": goal,
+        "startTime": 0.00,
+        "endtime": null,
+        "times": []
+    }
 })
   
