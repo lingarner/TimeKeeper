@@ -76,6 +76,7 @@ addProject.addEventListener("click", function (){
         if (textInput) {
           textInput.focus();
         }
+        
       }
 });
 
