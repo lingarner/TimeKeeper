@@ -53,13 +53,20 @@ function addDataToStorage() {
     const parsedData = allData ? JSON.parse(allData) : {projects: []};
     console.log(parsedData);
     const newProject = {
-        ["name"]: projectName
+            "name": projectName,
+            "goalColor": "",
+            "progressColor": " ",
+            "goalTime": "00:00:00",
+            "startTime": null,
+            "endtime": null,
+            "times": []
+    
     }
     parsedData.projects.push(newProject);
     const updatedDataString = JSON.stringify(parsedData);
     localStorage.setItem("allData", updatedDataString)
     allData = localStorage.getItem("allData");
-    clearProjectNames();
+    console.log(allData)
     displayProjectNames(allData);
     
 }
@@ -143,15 +150,15 @@ mySelect.addEventListener("change",function(){
             progressBox.style.backgroundColor = "#000000";
             goalBox.style.backgroundColor = "#818181"; // Default color if condition doesn't match any case
     }
-    // create and object
-    inputValue = {
-        "name": inputValue,
-        "goalColor": goalColor,
-        "progressColor": progressColor,
-        "goalTime": goal,
-        "startTime": 0.00,
-        "endtime": null,
-        "times": []
-    }
 })
-  
+    // create and object
+//     let inputValueObj = {
+//         "name": inputField.value,
+//         "goalColor": goalColor,
+//         "progressColor": progressColor,
+//         "goalTime": goal,
+//         "startTime": 0.00,
+//         "endtime": null,
+//         "times": []
+//     }
+// })
