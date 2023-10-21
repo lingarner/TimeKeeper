@@ -64,4 +64,10 @@ function addDataToStorage() {
     
 }
 
+const addProject = document.querySelector(".material-symbols-outlined");
+const formContainer = document.querySelector(".formContainer");
+addProject.addEventListener("click", function (){
+    formContainer.style.display = "block";
+    textInput.focus();
+});
   
